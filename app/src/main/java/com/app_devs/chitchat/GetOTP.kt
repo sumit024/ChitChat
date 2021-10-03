@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import com.app_devs.chitchat.R
 
 class GetOTP : Fragment() {
-    //kuch vi
+    //kuch vijvhhqkdbf
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
