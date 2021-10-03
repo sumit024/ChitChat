@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ChitChat">
         <activity android:name=".SplashActivity"
-            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar">
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
