@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/getOTP">
+
+    <fragment
+        android:id="@+id/getOTP"
+        android:name="com.app_devs.chitchat.ui.GetOTP"
+        android:label="Hey! Welcome"
+        tools:layout="@layout/fragment_get_o_t_p" >
+        <action
+            android:id="@+id/action_getOTP_to_processOTP"
+            app:destination="@id/processOTP" />
+    </fragment>
+    <fragment
+        android:id="@+id/processOTP"
+        android:name="com.app_devs.chitchat.ui.ProcessOTP"
+        android:label="Enter OTP"
+        tools:layout="@layout/fragment_process_o_t_p" />
+</navigation>

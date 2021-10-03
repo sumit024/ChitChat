@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.ProcessOTP">
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="@dimen/_222sdp"
+        android:layout_height="@dimen/_150sdp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/process" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="cursive"
+        android:text="We have sent an OTP to"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+
+    <TextView
+        android:id="@+id/getPhone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="cursive"
+        android:text="123457890"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <com.chaos.view.PinView
+        android:id="@+id/pinview"
+        style="@style/PinWidget.PinView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:cursorVisible="true"
+        android:gravity="center"
+        android:inputType="number"
+        app:cursorColor="@color/black"
+        app:hideLineWhenFilled="true"
+        app:itemCount="6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/getPhone" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/verify"
+        android:layout_width="220sp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/rounded_btn"
+        android:elevation="10dp"
+        android:fontFamily="cursive"
+        android:shadowColor="@color/black"
+        android:text="Verify and Sign In"
+        android:textAllCaps="false"
+        android:textColor="#fff"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pinview" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/verify">
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="cursive"
+            android:textSize="20sp"
+            android:text="Didn't receive the OTP?"
+            tools:layout_editor_absoluteX="86dp"
+            tools:layout_editor_absoluteY="356dp" />
+
+        <TextView
+            android:id="@+id/resend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:fontFamily="cursive"
+            android:textSize="20sp"
+            android:text="Resend"
+            android:textStyle="bold"
+            android:textColor="@color/primaryVariant"
+            tools:layout_editor_absoluteX="86dp"
+            tools:layout_editor_absoluteY="356dp" />
+
+    </LinearLayout>
+
+    <com.leo.simplearcloader.SimpleArcLoader
+        android:id="@+id/loader"
+        android:layout_width="@dimen/_50sdp"
+        android:layout_height="@dimen/_50sdp"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="40dp"
+        android:visibility="gone"
+        app:arc_margin="@dimen/_3sdp"
+        app:arc_speed="medium"
+        app:arc_style="complete_arc"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias="0.116">
+
+    </com.leo.simplearcloader.SimpleArcLoader>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
