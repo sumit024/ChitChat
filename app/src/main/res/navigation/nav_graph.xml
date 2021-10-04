@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/getOTP"
-        android:name="com.app_devs.chitchat.GetOTP"
+        android:name="com.app_devs.chitchat.GetOTPFragment"
         android:label="Hey! Welcome"
         tools:layout="@layout/fragment_get_o_t_p" >
         <action
@@ -16,7 +16,11 @@
     </fragment>
     <fragment
         android:id="@+id/processOTP"
-        android:name="com.app_devs.chitchat.ProcessOTP"
+        android:name="com.app_devs.chitchat.ProcessOTPFragment"
         android:label="Enter OTP"
-        tools:layout="@layout/fragment_process_o_t_p" />
+        tools:layout="@layout/fragment_process_o_t_p" >
+        <argument
+            android:name="phoneNum"
+            app:argType="string" />
+    </fragment>
 </navigation>
