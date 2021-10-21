@@ -1,4 +1,4 @@
-package com.app_devs.chitchat
+package com.app_devs.chitchat.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -14,7 +14,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         navController=findNavController(R.id.fragment)
         setupActionBarWithNavController(navController)
-
 
     }
 }

@@ -7,20 +7,40 @@
 
     <fragment
         android:id="@+id/getOTP"
-        android:name="com.app_devs.chitchat.GetOTPFragment"
+        android:name="com.app_devs.chitchat.fragments.GetOTPFragment"
         android:label="Hey! Welcome"
         tools:layout="@layout/fragment_get_o_t_p" >
         <action
             android:id="@+id/action_getOTP_to_processOTP"
             app:destination="@id/processOTP" />
+        <action
+            android:id="@+id/action_getOTP_to_chatScreenActivity"
+            app:destination="@id/chatScreenActivity" />
     </fragment>
     <fragment
         android:id="@+id/processOTP"
-        android:name="com.app_devs.chitchat.ProcessOTPFragment"
+        android:name="com.app_devs.chitchat.fragments.ProcessOTPFragment"
         android:label="Enter OTP"
         tools:layout="@layout/fragment_process_o_t_p" >
         <argument
             android:name="phoneNum"
             app:argType="string" />
+        <action
+            android:id="@+id/action_processOTP_to_profileSetUpFragment"
+            app:destination="@id/profileSetUpFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/profileSetUpFragment"
+        android:name="com.app_devs.chitchat.fragments.ProfileSetUpFragment"
+        android:label="Set your profile!"
+        tools:layout="@layout/fragment_profile_set_up" >
+        <action
+            android:id="@+id/action_profileSetUpFragment_to_chatScreenActivity"
+            app:destination="@id/chatScreenActivity" />
+    </fragment>
+    <activity
+        android:id="@+id/chatScreenActivity"
+        android:name="com.app_devs.chitchat.activities.ChatScreenActivity"
+        android:label="Chit-Chat"
+        tools:layout="@layout/activity_chat_screen" />
 </navigation>

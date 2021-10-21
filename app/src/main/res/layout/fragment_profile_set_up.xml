@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.ProfileSetUpFragment">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profilePhoto"
+        android:layout_width="@dimen/_150sdp"
+        android:layout_height="@dimen/_150sdp"
+        android:src="@drawable/annonymous"
+        android:layout_marginTop="@dimen/_40sdp"
+        android:layout_centerHorizontal="true"
+        app:civ_border_color="#FF000000"
+        app:civ_border_width="2dp"
+        app:layout_constraintVertical_bias="0.186" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/editTextLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_50sdp"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:layout_below="@+id/profilePhoto"
+        >
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="cursive"
+            android:textStyle="bold"
+            android:importantForAutofill="no"
+            android:textSize="@dimen/_18sdp"
+            android:hint="Enter your name " />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_proceed"
+        android:layout_width="@dimen/_200sdp"
+        android:layout_height="@dimen/_40sdp"
+        android:text="Proceed"
+        android:textSize="@dimen/_18sdp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/editTextLayout"
+        android:background="@drawable/rounded_btn"
+        android:layout_marginTop="@dimen/_30sdp"
+        android:textColor="@color/white"
+        android:textAllCaps="false"
+        android:textStyle="bold"
+        android:fontFamily="cursive"
+        />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="@dimen/_14sdp"
+        android:fontFamily="cursive"
+        android:layout_below="@+id/profilePhoto"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:text="Set up your profile by uploading an optional photo and an username " />
+
+    <com.leo.simplearcloader.SimpleArcLoader
+        android:id="@+id/loader"
+        android:layout_below="@+id/btn_proceed"
+        android:layout_marginTop="@dimen/_30sdp"
+        android:layout_width="@dimen/_60sdp"
+        android:layout_height="@dimen/_60sdp"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        app:arc_margin="@dimen/_3sdp"
+        app:arc_speed="medium"
+        app:arc_style="complete_arc"
+        >
+
+    </com.leo.simplearcloader.SimpleArcLoader>
+
+
+</RelativeLayout>

@@ -1,6 +1,5 @@
-package com.app_devs.chitchat
+package com.app_devs.chitchat.fragments
 
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -9,7 +8,10 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.app_devs.chitchat.ProcessOTPFragmentArgs
+import com.app_devs.chitchat.R
 import com.app_devs.chitchat.databinding.FragmentProcessOTPBinding
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.*
@@ -22,6 +24,8 @@ class ProcessOTPFragment : Fragment() {
     private var phoneNumber=""
     private lateinit var auth: FirebaseAuth
     private var otpId:String=""
+
+    //what the otp is
     private var otpText=""
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -29,8 +33,8 @@ class ProcessOTPFragment : Fragment() {
         binding= FragmentProcessOTPBinding.inflate(layoutInflater, container, false)
         auth= FirebaseAuth.getInstance()
         phoneNumber=data.phoneNum
+        checkAlreadyAuthenticated(phoneNumber)
         binding.getPhone.text=phoneNumber
-
         sendOTP()
         binding.verify.setOnClickListener {
             otpText=binding.pinview.text.toString()
@@ -49,6 +53,10 @@ class ProcessOTPFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    private fun checkAlreadyAuthenticated(phoneNumber: String) {
+
     }
 
     private fun sendOTP() {
@@ -107,6 +115,7 @@ class ProcessOTPFragment : Fragment() {
         auth.signInWithCredential(credential).addOnCompleteListener {
             if(it.isSuccessful)
             {
+                findNavController().navigate(R.id.action_processOTP_to_profileSetUpFragment)
                 Toast.makeText(requireContext(), "Logged In", Toast.LENGTH_LONG).show();
                 binding.loader.visibility = View.GONE
             }
