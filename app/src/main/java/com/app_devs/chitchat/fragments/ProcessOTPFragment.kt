@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.app_devs.chitchat.ProcessOTPFragmentArgs
+import com.app_devs.chitchat.fragments.ProcessOTPFragmentArgs
 import com.app_devs.chitchat.R
 import com.app_devs.chitchat.databinding.FragmentProcessOTPBinding
 import com.google.firebase.FirebaseException
@@ -23,6 +23,8 @@ class ProcessOTPFragment : Fragment() {
     private lateinit var binding:FragmentProcessOTPBinding
     private var phoneNumber=""
     private lateinit var auth: FirebaseAuth
+
+    //unique id of
     private var otpId:String=""
 
     //what the otp is
@@ -35,7 +37,11 @@ class ProcessOTPFragment : Fragment() {
         phoneNumber=data.phoneNum
         checkAlreadyAuthenticated(phoneNumber)
         binding.getPhone.text=phoneNumber
+
+        //send otp to user
         sendOTP()
+
+        //only when user enters the otp
         binding.verify.setOnClickListener {
             otpText=binding.pinview.text.toString()
             if (otpText.isEmpty()) {
@@ -63,6 +69,8 @@ class ProcessOTPFragment : Fragment() {
         binding.loader.visibility = View.VISIBLE
         val callbacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
 
+
+            // sim is in the same phone
             override fun onVerificationCompleted(credential: PhoneAuthCredential) {
                 // This callback will be invoked in two situations:
                 // 1 - Instant verification. In some cases the phone number can be instantly

@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
-import com.app_devs.chitchat.GetOTPFragmentDirections
+import com.app_devs.chitchat.fragments.GetOTPFragmentDirections
 import com.app_devs.chitchat.R
 import com.app_devs.chitchat.databinding.FragmentGetOTPBinding
 import com.google.firebase.auth.FirebaseAuth
@@ -22,10 +22,13 @@ class GetOTPFragment : Fragment() {
     ): View? {
         binding= FragmentGetOTPBinding.inflate(layoutInflater,container,false)
         auth= FirebaseAuth.getInstance()
+
+        //check if already logged in
         if(auth.currentUser!=null)
         {
             findNavController().navigate(R.id.action_getOTP_to_chatScreenActivity)
         }
+
         val ccp=binding.ccp
         ccp.registerCarrierNumberEditText(binding.phoneNum)
         binding.btnGetOTP.setOnClickListener {
