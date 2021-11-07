@@ -28,6 +28,9 @@
         <action
             android:id="@+id/action_processOTP_to_profileSetUpFragment"
             app:destination="@id/profileSetUpFragment" />
+        <action
+            android:id="@+id/action_processOTP_to_chatScreenActivity"
+            app:destination="@id/chatScreenActivity" />
     </fragment>
     <fragment
         android:id="@+id/profileSetUpFragment"
@@ -37,6 +40,9 @@
         <action
             android:id="@+id/action_profileSetUpFragment_to_chatScreenActivity"
             app:destination="@id/chatScreenActivity" />
+        <argument
+            android:name="phone"
+            app:argType="string" />
     </fragment>
     <activity
         android:id="@+id/chatScreenActivity"

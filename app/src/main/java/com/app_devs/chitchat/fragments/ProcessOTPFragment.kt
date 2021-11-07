@@ -15,6 +15,12 @@ import com.app_devs.chitchat.R
 import com.app_devs.chitchat.databinding.FragmentProcessOTPBinding
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.*
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.util.concurrent.TimeUnit
 
 
@@ -35,11 +41,10 @@ class ProcessOTPFragment : Fragment() {
         binding= FragmentProcessOTPBinding.inflate(layoutInflater, container, false)
         auth= FirebaseAuth.getInstance()
         phoneNumber=data.phoneNum
-        checkAlreadyAuthenticated(phoneNumber)
         binding.getPhone.text=phoneNumber
-
         //send otp to user
         sendOTP()
+
 
         //only when user enters the otp
         binding.verify.setOnClickListener {
@@ -61,10 +66,6 @@ class ProcessOTPFragment : Fragment() {
         return binding.root
     }
 
-    private fun checkAlreadyAuthenticated(phoneNumber: String) {
-
-    }
-
     private fun sendOTP() {
         binding.loader.visibility = View.VISIBLE
         val callbacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
@@ -81,6 +82,7 @@ class ProcessOTPFragment : Fragment() {
                 //Log.d(TAG, "onVerificationCompleted:$credential")
                 val code=credential.smsCode
                 binding.pinview.setText(code)
+
                 signInWithPhoneAuthCredential(credential)
                 binding.loader.visibility = View.GONE
             }
@@ -118,13 +120,28 @@ class ProcessOTPFragment : Fragment() {
 
     }
 
+    private fun addPhoneNumToDataBase(phoneNumber: String) {
+        val db=FirebaseFirestore.getInstance()
+        val phone= hashMapOf(
+                "contact" to phoneNumber
+        )
+        db.collection("phone")
+                .add(phone)
+                .addOnSuccessListener {
+                    Toast.makeText(requireContext(),"Phone number added",Toast.LENGTH_SHORT).show()
+                }
+                .addOnFailureListener {
+                    Toast.makeText(requireContext(),"Phone number not added",Toast.LENGTH_SHORT).show()
+                }
+    }
+
     private fun signInWithPhoneAuthCredential(credential: PhoneAuthCredential) {
         binding.loader.visibility = View.VISIBLE
         auth.signInWithCredential(credential).addOnCompleteListener {
             if(it.isSuccessful)
             {
-                findNavController().navigate(R.id.action_processOTP_to_profileSetUpFragment)
-                Toast.makeText(requireContext(), "Logged In", Toast.LENGTH_LONG).show();
+                checkIfAlreadyExists(phoneNumber)
+                Toast.makeText(requireContext(), "Logging In", Toast.LENGTH_LONG).show();
                 binding.loader.visibility = View.GONE
             }
             else
@@ -134,4 +151,32 @@ class ProcessOTPFragment : Fragment() {
             }
         }
     }
+    private  fun checkIfAlreadyExists(phone: String){
+        val db=FirebaseFirestore.getInstance()
+
+        var flag=true
+        db.collection("phone")
+                .get()
+                .addOnSuccessListener{ document ->
+                    for (doc in document) {
+                        val data = doc.data
+                        Log.d("SUNNY", data["contact"].toString())
+                        if (phone == data["contact"].toString()) {
+                            //move to chat screen since the user is already in db
+                                flag=false
+                            findNavController().navigate(R.id.action_processOTP_to_chatScreenActivity)
+                            break
+                        }
+                    }
+                    if(flag)
+                    {
+                        // it means that user is new so we add number to db and send it to profile segment
+                        addPhoneNumToDataBase(phoneNumber)
+                        findNavController().navigate(R.id.action_processOTP_to_profileSetUpFragment)
+                    }
+
+                }
+
+    }
+
 }

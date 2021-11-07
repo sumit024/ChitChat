@@ -40,8 +40,7 @@ class GetOTPFragment : Fragment() {
             }
             else
             {
-                val action=
-                    GetOTPFragmentDirections.actionGetOTPToProcessOTP(ccp.fullNumberWithPlus.trim())
+                val action= GetOTPFragmentDirections.actionGetOTPToProcessOTP(ccp.fullNumberWithPlus.trim())
                 Navigation.findNavController(it).navigate(action)
             }
         }
