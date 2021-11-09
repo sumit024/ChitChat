@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/chat_screen_nav_graph"
+    app:startDestination="@id/chatFragment">
+
+    <fragment
+        android:id="@+id/chatFragment"
+        android:name="com.app_devs.chitchat.fragments.UserChatFragment"
+        android:label="Chat"
+        tools:layout="@layout/fragment_user_chat" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.app_devs.chitchat.fragments.UserProfileFragment"
+        android:label="Profile"
+        tools:layout="@layout/fragment_user_profile" />
+</navigation>
