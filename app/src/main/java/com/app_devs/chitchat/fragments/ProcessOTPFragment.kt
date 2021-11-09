@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.app_devs.chitchat.fragments.ProcessOTPFragmentArgs
@@ -172,7 +173,8 @@ class ProcessOTPFragment : Fragment() {
                     {
                         // it means that user is new so we add number to db and send it to profile segment
                         addPhoneNumToDataBase(phoneNumber)
-                        findNavController().navigate(R.id.action_processOTP_to_profileSetUpFragment)
+                        val action=ProcessOTPFragmentDirections.actionProcessOTPToProfileSetUpFragment(phoneNumber)
+                        findNavController().navigate(action)
                     }
 
                 }
