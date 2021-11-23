@@ -21,7 +21,10 @@ import com.app_devs.chitchat.R
 import com.app_devs.chitchat.model.User
 import com.app_devs.chitchat.databinding.FragmentProfileSetUpBinding
 import com.bumptech.glide.Glide
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.SetOptions
+import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 
 class ProfileSetUpFragment : Fragment() {
@@ -30,11 +33,13 @@ class ProfileSetUpFragment : Fragment() {
     private var phoneNumber:String=""
     private var mSelectedImageUri:Uri?=null
     private var mUserProfileImageUri=""
+    private lateinit var uid:String
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         binding= FragmentProfileSetUpBinding.inflate(layoutInflater,container,false)
         phoneNumber=data.phone
+        uid=FirebaseAuth.getInstance().currentUser!!.uid
         binding.profilePhoto.setOnClickListener {
             if(ContextCompat.checkSelfPermission(requireContext(),android.Manifest.permission.READ_EXTERNAL_STORAGE)
                 ==PackageManager.PERMISSION_GRANTED)
@@ -75,9 +80,9 @@ class ProfileSetUpFragment : Fragment() {
     }
     private fun uploadProfileToDatabase()
     {
-        val user= User(binding.etName.text.toString(),mUserProfileImageUri)
+        val user= User(binding.etName.text.toString(),mUserProfileImageUri,uid)
         val db=FirebaseFirestore.getInstance()
-        db.collection("users").add(user).addOnSuccessListener {
+        db.collection("users").document(uid).set(user, SetOptions.merge()).addOnSuccessListener {
             Log.d("SHIKHA",user.toString())
             Toast.makeText(requireContext(),"Profile added",Toast.LENGTH_SHORT).show()
             findNavController().navigate(R.id.action_profileSetUpFragment_to_chatScreenActivity)

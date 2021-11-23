@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/chatFragment"
-        android:name="com.app_devs.chitchat.fragments.UserChatFragment"
+        android:name="com.app_devs.chitchat.fragments.UsersListFragment"
         android:label="Chat"
-        tools:layout="@layout/fragment_user_chat" />
+        tools:layout="@layout/fragment_list_users" />
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.app_devs.chitchat.fragments.UserProfileFragment"

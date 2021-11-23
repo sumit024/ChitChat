@@ -8,20 +8,11 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.navigation.Navigation
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.app_devs.chitchat.fragments.ProcessOTPFragmentArgs
-import com.app_devs.chitchat.R
+import com.app_devs.chitchat.firebase.FirestoreClass
 import com.app_devs.chitchat.databinding.FragmentProcessOTPBinding
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.*
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.ktx.Firebase
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import java.util.concurrent.TimeUnit
 
 
@@ -121,27 +112,13 @@ class ProcessOTPFragment : Fragment() {
 
     }
 
-    private fun addPhoneNumToDataBase(phoneNumber: String) {
-        val db=FirebaseFirestore.getInstance()
-        val phone= hashMapOf(
-                "contact" to phoneNumber
-        )
-        db.collection("phone")
-                .add(phone)
-                .addOnSuccessListener {
-                    Toast.makeText(requireContext(),"Phone number added",Toast.LENGTH_SHORT).show()
-                }
-                .addOnFailureListener {
-                    Toast.makeText(requireContext(),"Phone number not added",Toast.LENGTH_SHORT).show()
-                }
-    }
 
     private fun signInWithPhoneAuthCredential(credential: PhoneAuthCredential) {
         binding.loader.visibility = View.VISIBLE
         auth.signInWithCredential(credential).addOnCompleteListener {
             if(it.isSuccessful)
             {
-                checkIfAlreadyExists(phoneNumber)
+                FirestoreClass().checkIfAlreadyExists(phoneNumber,requireContext(),requireView())
                 Toast.makeText(requireContext(), "Logging In", Toast.LENGTH_LONG).show();
                 binding.loader.visibility = View.GONE
             }
@@ -152,33 +129,6 @@ class ProcessOTPFragment : Fragment() {
             }
         }
     }
-    private  fun checkIfAlreadyExists(phone: String){
-        val db=FirebaseFirestore.getInstance()
 
-        var flag=true
-        db.collection("phone")
-                .get()
-                .addOnSuccessListener{ document ->
-                    for (doc in document) {
-                        val data = doc.data
-                        Log.d("SUNNY", data["contact"].toString())
-                        if (phone == data["contact"].toString()) {
-                            //move to chat screen since the user is already in db
-                                flag=false
-                            findNavController().navigate(R.id.action_processOTP_to_chatScreenActivity)
-                            break
-                        }
-                    }
-                    if(flag)
-                    {
-                        // it means that user is new so we add number to db and send it to profile segment
-                        addPhoneNumToDataBase(phoneNumber)
-                        val action=ProcessOTPFragmentDirections.actionProcessOTPToProfileSetUpFragment(phoneNumber)
-                        findNavController().navigate(action)
-                    }
-
-                }
-
-    }
 
 }
