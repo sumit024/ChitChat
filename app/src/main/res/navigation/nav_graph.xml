@@ -9,7 +9,7 @@
         android:id="@+id/getOTP"
         android:name="com.app_devs.chitchat.fragments.GetOTPFragment"
         android:label="Hey! Welcome"
-        tools:layout="@layout/fragment_get_o_t_p" >
+        tools:layout="@layout/fragment_get_o_t_p">
         <action
             android:id="@+id/action_getOTP_to_processOTP"
             app:destination="@id/processOTP" />
@@ -21,7 +21,7 @@
         android:id="@+id/processOTP"
         android:name="com.app_devs.chitchat.fragments.ProcessOTPFragment"
         android:label="Enter OTP"
-        tools:layout="@layout/fragment_process_o_t_p" >
+        tools:layout="@layout/fragment_process_o_t_p">
         <argument
             android:name="phoneNum"
             app:argType="string" />
@@ -36,7 +36,7 @@
         android:id="@+id/profileSetUpFragment"
         android:name="com.app_devs.chitchat.fragments.ProfileSetUpFragment"
         android:label="Set your profile!"
-        tools:layout="@layout/fragment_profile_set_up" >
+        tools:layout="@layout/fragment_profile_set_up">
         <action
             android:id="@+id/action_profileSetUpFragment_to_chatScreenActivity"
             app:destination="@id/chatScreenActivity" />

@@ -9,10 +9,23 @@
         android:id="@+id/chatFragment"
         android:name="com.app_devs.chitchat.fragments.UsersListFragment"
         android:label="Chat"
-        tools:layout="@layout/fragment_list_users" />
+        tools:layout="@layout/fragment_list_users" >
+        <action
+            android:id="@+id/action_chatFragment_to_userChatActivity"
+            app:destination="@id/userChatActivity" />
+    </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.app_devs.chitchat.fragments.UserProfileFragment"
         android:label="Profile"
         tools:layout="@layout/fragment_user_profile" />
+    <activity
+        android:id="@+id/userChatActivity"
+        android:name="com.app_devs.chitchat.activities.UserChatActivity"
+        android:label="activity_user_chat"
+        tools:layout="@layout/activity_user_chat" >
+        <argument
+            android:name="receiver"
+            app:argType="com.app_devs.chitchat.model.User" />
+    </activity>
 </navigation>

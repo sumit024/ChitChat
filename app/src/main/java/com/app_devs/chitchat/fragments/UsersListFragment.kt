@@ -5,7 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.app_devs.chitchat.R
 import com.app_devs.chitchat.firebase.FirestoreClass
 import com.app_devs.chitchat.adapters.UsersListAdapter
 import com.app_devs.chitchat.databinding.FragmentListUsersBinding
@@ -28,8 +30,16 @@ class UsersListFragment : Fragment() {
             binding.usersRv.layoutManager=LinearLayoutManager(requireContext())
             val usersListAdapter= UsersListAdapter(requireContext(),list)
             binding.usersRv.adapter=usersListAdapter
+            usersListAdapter.onClickListener(object :UsersListAdapter.OnClickListener{
+                override fun onClick(position: Int, user: User) {
+                    val action=UsersListFragmentDirections.actionChatFragmentToUserChatActivity(user)
+                    findNavController().navigate(action)
+                }
+
+            })
         }
     }
+
 
 
 
